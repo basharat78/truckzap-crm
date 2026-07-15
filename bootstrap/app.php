@@ -17,9 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
             ->group(base_path('routes/admin.php'));
     }
     )
+
     ->withMiddleware(function (Middleware $middleware): void {
-        //
-    })
+    $middleware->alias([
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+    ]);
+})
+    
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),

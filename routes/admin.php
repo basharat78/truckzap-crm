@@ -3,9 +3,10 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 Route::get('admin/login', [DashboardController::class, 'login'])->name('admin.login');
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','role:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // Profile
