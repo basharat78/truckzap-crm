@@ -16,7 +16,7 @@ class adminseeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@truckzap.com',
-            'password' => bcrypt('password'), // Change this to a secure password
+            'password' => 'password', // Change this to a secure password
         ]);
         $user->assignRole('admin');
     }

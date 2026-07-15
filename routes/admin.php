@@ -3,8 +3,12 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
 
-Route::get('admin/login', [DashboardController::class, 'login'])->name('admin.login');
+Route::get('admin/login', [AuthController::class, 'create'])->name('admin.login');
+Route::post('admin/login', [AuthController::class, 'store'])->name('admin.login.store');
+Route::post('admin/logout', [AuthController::class, 'destroy'])->name('admin.logout');
+
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','role:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

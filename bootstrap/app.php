@@ -17,14 +17,18 @@ return Application::configure(basePath: dirname(__DIR__))
             ->group(base_path('routes/admin.php'));
     }
     )
+->withMiddleware(function (Middleware $middleware): void {
+    $middleware->redirectGuestsTo(fn ($request) => $request->is('admin/*')
+        ? route('admin.login')
+        : route('login'));
 
-    ->withMiddleware(function (Middleware $middleware): void {
     $middleware->alias([
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
     ]);
 })
+
     
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
