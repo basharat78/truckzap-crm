@@ -83,7 +83,10 @@ class BrokerDataTable extends DataTable
      */
     public function query(Broker $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->when(request()->filled('status'), function ($query) {
+                $query->where('status', request()->input('status'));
+            });
     }
 
     /**

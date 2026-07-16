@@ -86,12 +86,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Department</label>
-                                            <input type="text" class="form-control" name="department" value="{{ old('department') }}">
+                                            <select name="department" id="">
+                                                <option value="">Select Department</option>
+                                                <option value="sales" {{ old('department') == 'sales' ? 'selected' : '' }}>Sales</option>
+                                                <option value="support" {{ old('department') == 'support' ? 'selected' : '' }}>Support</option>
+                                                <option value="operations" {{ old('department') == 'operations' ? 'selected' : '' }}>Operations</option>
+                                            </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -154,7 +159,7 @@
                                         <div class="form-group">
                                             <label for="">Equipment Type <span class="text-danger">*</span></label>
                                             <select name="equipment_type[]" class="form-control select2" multiple required>
-                                                @foreach ($equipmentTypes ?? ['Box Truck', 'Dry Van', 'Flatbed', 'Reefer (Refrigerated)', 'Step Deck', 'Lowboy', 'Conestoga', 'Power Only', 'Tanker', 'Car Hauler', 'Dump Truck', 'Hotshot'] as $type)
+                                                @foreach ($equipmentTypes ?? ['Box Truck', 'Dry Van', 'Flatbed', 'Reefer (Refrigerated)', 'Step Deck', 'Lowboy', 'Conestoga', 'Power Only', 'Tanker', 'Car Hauler', 'Hotshot','RGN','Sprinter Van','Intermodal'] as $type)
                                                     <option @selected(collect(old('equipment_type'))->contains($type)) value="{{ $type }}">{{ $type }}</option>
                                                 @endforeach
                                             </select>

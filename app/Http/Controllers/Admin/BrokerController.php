@@ -19,7 +19,15 @@ class BrokerController extends Controller
 {
     public function index(BrokerDataTable $dataTable) :  View | JsonResponse
     {
-        return $dataTable->render('admin.brokers.index');
+        if (request()->ajax()) {
+            return $dataTable->render('admin.brokers.index');
+        }
+
+        $statusCounts = Broker::selectRaw('status, count(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
+        return $dataTable->render('admin.brokers.index', compact('statusCounts'));
     }
     public function create() : RedirectResponse | View
     {
@@ -37,7 +45,6 @@ class BrokerController extends Controller
             'dot_number' => 'nullable|string|max:255',
             'website' => 'nullable|url|max:255',
             'name' => 'required|string|max:255',
-            'department' => 'nullable|string|max:255',
             'email' => 'required|email|unique:brokers,email',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',

@@ -14,7 +14,6 @@ class Broker extends Model
         'website',
         'status',
         'name',
-        'department',
         'email',
         'phone',
         'address',
