@@ -27,4 +27,9 @@ class Broker extends Model
         'days_to_pay',
         'notes'
     ];
+
+    protected $casts = [
+        'equipment_type' => 'array',
+        'operating_states' => 'array',
+    ];
 }

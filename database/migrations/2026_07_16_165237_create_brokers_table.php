@@ -31,15 +31,14 @@ return new class extends Migration
             $table->string('state');
             $table->string('zip_code');
 
-            $table->string('equipment_type');
-            $table->string('operating_states');
+            $table->json('equipment_type');
+            $table->json('operating_states');
 
             $table->string('credit_score')->nullable();
             $table->integer('days_to_pay')->nullable();
 
             $table->text('notes')->nullable();
 
-            $table->enum('status', ['active', 'inactive', 'blacklisted','pending'])->default('pending');
 
             $table->timestamps();
         });

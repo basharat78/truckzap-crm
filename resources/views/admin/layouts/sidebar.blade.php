@@ -69,6 +69,10 @@
                 </ul>
             </li>
 
+            <li class="{{ setSidebarActive(['admin.brokers.*']) }}"><a class="nav-link"
+                    href="{{ url('admin/brokers/create') }}"><i class="fas fa-handshake"></i> <span>Brokers</span></a>
+            </li>
+
         </ul>
     </aside>
 </div>
