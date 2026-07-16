@@ -58,10 +58,14 @@
             <li class="{{ setSidebarActive(['admin.dashboard.index']) }}"><a class="nav-link"
                     href="{{ route('admin.dashboard.index') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
             </li>
-         
 
-
-            
+            <li class="menu-header">User Management</li>
+            <li class="{{ setSidebarActive(['admin.users.*']) }}"><a class="nav-link"
+                    href="{{ url('admin/users') }}"><i class="fas fa-user"></i> <span>Users</span></a>
+            </li>
+            <li class="{{ setSidebarActive(['admin.roles.*']) }}"><a class="nav-link"
+                    href="{{ url('admin/roles') }}"><i class="fas fa-user-shield"></i> <span>Roles &amp; Permissions</span></a>
+            </li>
 
         </ul>
     </aside>
