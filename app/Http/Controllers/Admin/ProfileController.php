@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
+use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
@@ -34,5 +35,18 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('admin.profile')->with('success', 'Profile updated successfully.');
+    }
+    function  PasswordUpdate(Request $request): RedirectResponse
+    { //redirdectResponse is a return type for redirecting to the same page
+        $request->validate([
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+     
+        return redirect()->back()->with('success', 'Password updated successfully.');
     }
 }
