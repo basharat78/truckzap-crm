@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\RoleDataTable;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Redirect;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() : RedirectResponse | view
+    public function index(RoleDataTable $dataTable)
     {
-        return view('admin.roles.index');
+        return $dataTable->render('admin.roles.index');
     }
 
     /**
@@ -23,7 +24,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        $permissionGroups = $this->groupedPermissions();
+
+        return view('admin.roles.create', compact('permissionGroups'));
     }
 
     /**
@@ -31,38 +34,64 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name',
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $role = Role::create(['name' => $validated['name']]);
+        $role->syncPermissions(array_map('intval', $validated['permissions'] ?? []));
+
+        return redirect()->route('admin.roles.index')->with('success', 'Role created successfully.');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        //
+        $permissionGroups = $this->groupedPermissions();
+
+        return view('admin.roles.edit', compact('role', 'permissionGroups'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
+
+        $role->update(['name' => $validated['name']]);
+        $role->syncPermissions(array_map('intval', $validated['permissions'] ?? []));
+
+        return redirect()->route('admin.roles.index')->with('success', 'Role updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+    /**
+     * Group permissions by the subject in their "action-subject" name (e.g. "manage-users" -> "users").
+     */
+    protected function groupedPermissions()
+    {
+        return Permission::all()->groupBy(function ($permission) {
+            return Str::contains($permission->name, '-')
+                ? Str::after($permission->name, '-')
+                : 'general';
+        });
     }
 }
