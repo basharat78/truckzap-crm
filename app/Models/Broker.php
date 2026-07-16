@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Broker extends Model
+{
+    protected $fillable = [
+        'dispatcher_name',
+        'company_name',
+        'mc_number',
+        'dot_number',
+        'website',
+        'status',
+        'name',
+        'department',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'state',
+        'zip_code',
+        'equipment_type',
+        'operating_states',
+        'credit_score',
+        'days_to_pay',
+        'notes'
+    ];
+}
