@@ -65,6 +65,10 @@ class BrokerController extends Controller
 
         return redirect()->route('admin.brokers.index')->with('success', __('Broker created successfully.'));
     }
+    public function show(Broker $broker) : JsonResponse
+    {
+        return response()->json(['broker' => $broker]);
+    }
     public function edit(Broker $broker) : RedirectResponse | View
     {
         return view('admin.brokers.edit', compact('broker'));

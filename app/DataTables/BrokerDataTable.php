@@ -52,14 +52,19 @@ class BrokerDataTable extends DataTable
                 return "<span class='badge badge-{$color}'>" . ucfirst($broker->status) . '</span>';
             })
             ->addColumn('action', function (Broker $broker) {
-                $edit = '<a href="' . route('admin.brokers.edit', $broker->id) . '" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>';
+                $view = '<a href="#"
+                data-url="' . route('admin.brokers.show', $broker->id) . '"
+                class="view-item btn btn-sm btn-info">
+                <i class="fas fa-eye"></i>
+            </a>';
+                $edit = '<a href="' . route('admin.brokers.edit', $broker->id) . '" class="btn btn-sm btn-primary ml-2"><i class="fas fa-edit"></i></a>';
                 $delete = '<a href="#"
                 data-url="' . route('admin.brokers.destroy', $broker->id) . '"
                 class="delete-item btn btn-sm btn-danger ml-2">
                 <i class="fas fa-trash"></i>
             </a>';
 
-                return $edit . $delete;
+                return $view . $edit . $delete;
             })
             ->filter(function (QueryBuilder $query) {
                 $search = request()->input('search.value');
@@ -128,8 +133,8 @@ class BrokerDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(100)
-                ->addClass('text-center'),
+                ->width(140)
+                ->addClass('text-center text-nowrap'),
         ];
     }
 
