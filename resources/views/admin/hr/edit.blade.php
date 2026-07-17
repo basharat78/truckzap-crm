@@ -1,9 +1,5 @@
 @extends('admin.layouts.master')
 
-@php
-    $evaluation = $evaluation ?? null;
-@endphp
-
 @section('contents')
     <section class="section">
         <div class="section-header">
@@ -26,7 +22,7 @@
                             <h4>Interview Evaluation Form</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('admin/hr/' . optional($evaluation)->id) }}" method="POST" id="interview-evaluation-form">
+                            <form action="{{ url('admin/hr/' . $hr->id) }}" method="POST" id="interview-evaluation-form">
                                 @csrf
                                 @method('PUT')
 
@@ -35,63 +31,63 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Candidate Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="candidate_name" value="{{ old('candidate_name', optional($evaluation)->candidate_name) }}" required>
+                                            <input type="text" class="form-control" name="candidate_name" value="{{ old('candidate_name', optional($hr)->candidate_name) }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="{{ old('phone', optional($evaluation)->phone) }}">
+                                            <input type="text" class="form-control" name="phone" value="{{ old('phone', optional($hr)->phone) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{ old('email', optional($evaluation)->email) }}">
+                                            <input type="email" class="form-control" name="email" value="{{ old('email', optional($hr)->email) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Position</label>
-                                            <input type="text" class="form-control" name="position" value="{{ old('position', optional($evaluation)->position) }}">
+                                            <input type="text" class="form-control" name="position" value="{{ old('position', optional($hr)->position) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Department</label>
-                                            <input type="text" class="form-control" name="department" value="{{ old('department', optional($evaluation)->department) }}">
+                                            <input type="text" class="form-control" name="department" value="{{ old('department', optional($hr)->department) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Expected Salary</label>
-                                            <input type="text" class="form-control" name="expected_salary" value="{{ old('expected_salary', optional($evaluation)->expected_salary) }}">
+                                            <input type="text" class="form-control" name="expected_salary" value="{{ old('expected_salary', optional($hr)->expected_salary) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Experience</label>
-                                            <input type="text" class="form-control" name="experience" value="{{ old('experience', optional($evaluation)->experience) }}">
+                                            <input type="text" class="form-control" name="experience" value="{{ old('experience', optional($hr)->experience) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">City</label>
-                                            <input type="text" class="form-control" name="city" value="{{ old('city', optional($evaluation)->city) }}">
+                                            <input type="text" class="form-control" name="city" value="{{ old('city', optional($hr)->city) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Reference</label>
-                                            <input type="text" class="form-control" name="reference" value="{{ old('reference', optional($evaluation)->reference) }}">
+                                            <input type="text" class="form-control" name="reference" value="{{ old('reference', optional($hr)->reference) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -103,14 +99,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Interviewer</label>
-                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer', optional($evaluation)->interviewer) }}">
+                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer', optional($hr)->interviewer) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Interview Date</label>
-                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date', optional($evaluation)->interview_date) }}">
+                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date', optional($hr)->interview_date) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -122,63 +118,63 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Communication</label>
-                                            <input type="number" class="form-control skill-score" name="communication" min="1" max="10" value="{{ old('communication', optional($evaluation)->communication) }}">
+                                            <input type="number" class="form-control skill-score" name="communication" min="1" max="10" value="{{ old('communication', optional($hr)->communication) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">English</label>
-                                            <input type="number" class="form-control skill-score" name="english" min="1" max="10" value="{{ old('english', optional($evaluation)->english) }}">
+                                            <input type="number" class="form-control skill-score" name="english" min="1" max="10" value="{{ old('english', optional($hr)->english) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Computer Skills</label>
-                                            <input type="number" class="form-control skill-score" name="computer_skills" min="1" max="10" value="{{ old('computer_skills', optional($evaluation)->computer_skills) }}">
+                                            <input type="number" class="form-control skill-score" name="computer_skills" min="1" max="10" value="{{ old('computer_skills', optional($hr)->computer_skills) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Confidence</label>
-                                            <input type="number" class="form-control skill-score" name="confidence" min="1" max="10" value="{{ old('confidence', optional($evaluation)->confidence) }}">
+                                            <input type="number" class="form-control skill-score" name="confidence" min="1" max="10" value="{{ old('confidence', optional($hr)->confidence) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Learning Ability</label>
-                                            <input type="number" class="form-control skill-score" name="learning_ability" min="1" max="10" value="{{ old('learning_ability', optional($evaluation)->learning_ability) }}">
+                                            <input type="number" class="form-control skill-score" name="learning_ability" min="1" max="10" value="{{ old('learning_ability', optional($hr)->learning_ability) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Dispatch Knowledge</label>
-                                            <input type="number" class="form-control skill-score" name="dispatch_knowledge" min="1" max="10" value="{{ old('dispatch_knowledge', optional($evaluation)->dispatch_knowledge) }}">
+                                            <input type="number" class="form-control skill-score" name="dispatch_knowledge" min="1" max="10" value="{{ old('dispatch_knowledge', optional($hr)->dispatch_knowledge) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Negotiation Skills</label>
-                                            <input type="number" class="form-control skill-score" name="negotiation_skills" min="1" max="10" value="{{ old('negotiation_skills', optional($evaluation)->negotiation_skills) }}">
+                                            <input type="number" class="form-control skill-score" name="negotiation_skills" min="1" max="10" value="{{ old('negotiation_skills', optional($hr)->negotiation_skills) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Typing Speed (WPM)</label>
-                                            <input type="number" class="form-control" name="typing_speed" min="0" value="{{ old('typing_speed', optional($evaluation)->typing_speed) }}">
+                                            <input type="number" class="form-control" name="typing_speed" min="0" value="{{ old('typing_speed', optional($hr)->typing_speed) }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Total Score</label>
-                                            <input type="number" class="form-control" name="total_score" id="total_score" value="{{ old('total_score', optional($evaluation)->total_score) }}" readonly>
+                                            <input type="number" class="form-control" name="total_score" id="total_score" value="{{ old('total_score', optional($hr)->total_score) }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -190,21 +186,21 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Strengths</label>
-                                            <textarea class="form-control" name="strengths" rows="3">{{ old('strengths', optional($evaluation)->strengths) }}</textarea>
+                                            <textarea class="form-control" name="strengths" rows="3">{{ old('strengths', optional($hr)->strengths) }}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Weaknesses</label>
-                                            <textarea class="form-control" name="weaknesses" rows="3">{{ old('weaknesses', optional($evaluation)->weaknesses) }}</textarea>
+                                            <textarea class="form-control" name="weaknesses" rows="3">{{ old('weaknesses', optional($hr)->weaknesses) }}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Comments</label>
-                                            <textarea class="form-control" name="comments" rows="3">{{ old('comments', optional($evaluation)->comments) }}</textarea>
+                                            <textarea class="form-control" name="comments" rows="3">{{ old('comments', optional($hr)->comments) }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -218,10 +214,10 @@
                                             <label for="">Recommendation</label>
                                             <select name="recommendation" class="form-control">
                                                 <option value="">Select</option>
-                                                <option value="highly_recommended" {{ old('recommendation', optional($evaluation)->recommendation) == 'highly_recommended' ? 'selected' : '' }}>Highly Recommended</option>
-                                                <option value="recommended" {{ old('recommendation', optional($evaluation)->recommendation) == 'recommended' ? 'selected' : '' }}>Recommended</option>
-                                                <option value="maybe" {{ old('recommendation', optional($evaluation)->recommendation) == 'maybe' ? 'selected' : '' }}>Maybe</option>
-                                                <option value="not_recommended" {{ old('recommendation', optional($evaluation)->recommendation) == 'not_recommended' ? 'selected' : '' }}>Not Recommended</option>
+                                                <option value="highly_recommended" {{ old('recommendation', optional($hr)->recommendation) == 'highly_recommended' ? 'selected' : '' }}>Highly Recommended</option>
+                                                <option value="recommended" {{ old('recommendation', optional($hr)->recommendation) == 'recommended' ? 'selected' : '' }}>Recommended</option>
+                                                <option value="maybe" {{ old('recommendation', optional($hr)->recommendation) == 'maybe' ? 'selected' : '' }}>Maybe</option>
+                                                <option value="not_recommended" {{ old('recommendation', optional($hr)->recommendation) == 'not_recommended' ? 'selected' : '' }}>Not Recommended</option>
                                             </select>
                                         </div>
                                     </div>
@@ -230,10 +226,10 @@
                                         <div class="form-group">
                                             <label for="">Status</label>
                                             <select name="status" class="form-control">
-                                                <option value="pending" {{ old('status', optional($evaluation)->status) == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                <option value="selected" {{ old('status', optional($evaluation)->status) == 'selected' ? 'selected' : '' }}>Selected</option>
-                                                <option value="rejected" {{ old('status', optional($evaluation)->status) == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                                <option value="on_hold" {{ old('status', optional($evaluation)->status) == 'on_hold' ? 'selected' : '' }}>On Hold</option>
+                                                <option value="pending" {{ old('status', optional($hr)->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="selected" {{ old('status', optional($hr)->status) == 'selected' ? 'selected' : '' }}>Selected</option>
+                                                <option value="rejected" {{ old('status', optional($hr)->status) == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                <option value="on_hold" {{ old('status', optional($hr)->status) == 'on_hold' ? 'selected' : '' }}>On Hold</option>
                                             </select>
                                         </div>
                                     </div>
