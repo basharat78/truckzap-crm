@@ -36,24 +36,40 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+                                            <label for="">Phone <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                            <label for="">Email <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Position</label>
                                             <input type="text" class="form-control" name="position" value="{{ old('position') }}">
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                     <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Position <span class="text-danger">*</span></label>
+                                            <select name="position" id="" class="form-control" required>
+                                                <option value="">Select Position</option>
+                                                <option value="dispatcher" {{ old('position') == 'dispatcher' ? 'selected' : '' }}>Dispatcher</option>
+                                                <option value="sales executive" {{ old('position') == 'sales executive' ? 'selected' : '' }}>Sales Executive</option>
+                                                <option value="hr" {{ old('position') == 'hr' ? 'selected' : '' }}>Human Resource (HR)</option>
+                                                 <option value="carrier sales" {{ old('position') == 'carrier sales' ? 'selected' : '' }}>Carrier Sales</option>
+                                                <option value="accounts" {{ old('position') == 'accounts' ? 'selected' : '' }}>Accounts</option>
+                                                <option value="onboarding" {{ old('position') == 'onboarding' ? 'selected' : '' }}>OnBoarding</option>
+                                                 <option value="marketing" {{ old('position') == 'marketing' ? 'selected' : '' }}>Marketing</option>
+                                                <option value="other" {{ old('position') == 'other' ? 'selected' : '' }}>Other</option>
+                                            </select>
+                                        </div>
+                                    </div> 
 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -64,15 +80,15 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Expected Salary</label>
-                                            <input type="text" class="form-control" name="expected_salary" value="{{ old('expected_salary') }}">
+                                            <label for="">Expected Salary <span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" name="expected_salary" value="{{ old('expected_salary') }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">Experience</label>
-                                            <input type="text" class="form-control" name="experience" value="{{ old('experience') }}">
+                                            <input type="number" class="form-control" name="experience" value="{{ old('experience') }}">
                                         </div>
                                     </div>
 
@@ -97,15 +113,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Interviewer</label>
-                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer') }}">
+                                            <label for="">Interviewer <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer') }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Interview Date</label>
-                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date') }}">
+                                            <label for="">Interview Date <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +133,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">Communication</label>
-                                            <input type="number" class="form-control skill-score" name="communication" min="1" max="10" value="{{ old('communication') }}">
+                                            <input type="number" class="form-control skill-score" name="communication" min="1" max="10" value="{{ old('communication') }}" >
                                         </div>
                                     </div>
 
@@ -224,7 +240,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Status</label>
-                                            <select name="status" class="form-control">
+                                            <select name="status" class="form-control" required>
                                                 <option value="pending" {{ old('status', 'pending') == 'pending' ? 'selected' : '' }}>Pending</option>
                                                 <option value="selected" {{ old('status') == 'selected' ? 'selected' : '' }}>Selected</option>
                                                 <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected</option>

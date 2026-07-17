@@ -25,6 +25,7 @@ class HR extends Model
             'learning_ability',
             'dispatch_knowledge',
             'negotiation_skills',
+            
             'typing_speed',
             'total_score',
             'strengths',

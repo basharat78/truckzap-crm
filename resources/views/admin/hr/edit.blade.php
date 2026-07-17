@@ -37,24 +37,42 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Phone</label>
-                                            <input type="text" class="form-control" name="phone" value="{{ old('phone', optional($hr)->phone) }}">
+                                            <label for="">Phone <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="phone" value="{{ old('phone', optional($hr)->phone) }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Email</label>
-                                            <input type="email" class="form-control" name="email" value="{{ old('email', optional($hr)->email) }}">
+                                            <label for="">Email <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" name="email" value="{{ old('email', optional($hr)->email) }}" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Position</label>
-                                            <input type="text" class="form-control" name="position" value="{{ old('position', optional($hr)->position) }}">
+                                            <label for="">Position <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="position" value="{{ old(optional($hr)->position) }}" required>
                                         </div>
-                                    </div>
+                                    </div> --}}
+
+                               <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Position <span class="text-danger">*</span></label>
+                                            <select name="position" id="" class="form-control" required>
+                                                <option value="">Select Position</option>
+                                                <option value="dispatcher" {{ old('position', optional($hr)->position) == 'dispatcher' ? 'selected' : '' }}>Dispatcher</option>
+                                                <option value="sales executive" {{ old('position', optional($hr)->position) == 'sales executive' ? 'selected' : '' }}>Sales Executive</option>
+                                                <option value="hr" {{ old('position', optional($hr)->position) == 'hr' ? 'selected' : '' }}>Human Resource (HR)</option>
+                                                 <option value="carrier sales" {{ old('position', optional($hr)->position) == 'carrier sales' ? 'selected' : '' }}>Carrier Sales</option>
+                                                <option value="accounts" {{ old('position', optional($hr)->position) == 'accounts' ? 'selected' : '' }}>Accounts</option>
+                                                <option value="onboarding" {{ old('position', optional($hr)->position) == 'onboarding' ? 'selected' : '' }}>OnBoarding</option>
+                                                 <option value="marketing" {{ old('position', optional($hr)->position) == 'marketing' ? 'selected' : '' }}>Marketing</option>
+                                                <option value="other" {{ old('position', optional($hr)->position) == 'other' ? 'selected' : '' }}>Other</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+
 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -65,8 +83,8 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Expected Salary</label>
-                                            <input type="text" class="form-control" name="expected_salary" value="{{ old('expected_salary', optional($hr)->expected_salary) }}">
+                                            <label for="">Expected Salary <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="expected_salary" value="{{ old('expected_salary', optional($hr)->expected_salary) }}" required>
                                         </div>
                                     </div>
 
@@ -98,15 +116,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Interviewer</label>
-                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer', optional($hr)->interviewer) }}">
+                                            <label for="">Interviewer <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="interviewer" value="{{ old('interviewer', optional($hr)->interviewer) }}" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Interview Date</label>
-                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date', optional($hr)->interview_date) }}">
+                                            <label for="">Interview Date <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" name="interview_date" value="{{ old('interview_date', optional($hr)->interview_date) }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +230,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Recommendation</label>
-                                            <select name="recommendation" class="form-control">
+                                            <select name="recommendation" class="form-control" required>
                                                 <option value="">Select</option>
                                                 <option value="highly_recommended" {{ old('recommendation', optional($hr)->recommendation) == 'highly_recommended' ? 'selected' : '' }}>Highly Recommended</option>
                                                 <option value="recommended" {{ old('recommendation', optional($hr)->recommendation) == 'recommended' ? 'selected' : '' }}>Recommended</option>

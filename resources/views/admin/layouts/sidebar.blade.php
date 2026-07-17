@@ -59,21 +59,21 @@
                     href="{{ route('admin.dashboard.index') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
             </li>
 
-           <li class="dropdown {{ setSidebarActive(['admin.user.*', 'admin.roles.*]']) }}">
+          
+          <li class="{{ setSidebarActive(['admin.hr.*']) }}"><a class="nav-link"
+                href="{{ url ('admin/hr') }}"><i class="fas fa-users"></i> <span>HR Management</span> </a>
+            </li>
+            <li class="{{ setSidebarActive(['admin.brokers.*']) }}"><a class="nav-link"
+                    href="{{ url('admin/brokers') }}"><i class="fas fa-handshake"></i> <span>Brokers Management</span></a>
+            </li>
+         
+            
+             <li class="dropdown {{ setSidebarActive(['admin.user.*', 'admin.roles.*]']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fas fa-fingerprint"></i> <span>User Management</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.users.*']) }}"><a class="nav-link" href="{{ url('admin/users') }}">Users</a></li>
                     <li class="{{ setSidebarActive(['admin.roles.*']) }}"><a class="nav-link" href="{{ url('admin/roles') }}">Roles &amp; Permissions</a></li>
-
-
                 </ul>
-            </li>
-
-            <li class="{{ setSidebarActive(['admin.brokers.*']) }}"><a class="nav-link"
-                    href="{{ url('admin/brokers') }}"><i class="fas fa-handshake"></i> <span>Brokers</span></a>
-            </li>
-            <li class="{{ setSidebarActive(['admin.hr.*']) }}"><a class="nav-link"
-                href="{{ url ('admin/hr') }}"><i class="fas fa-handshake"></i> <span>HR Management</span> </a>
             </li>
 
         </ul>
