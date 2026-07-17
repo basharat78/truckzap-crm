@@ -229,7 +229,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Recommendation</label>
+                                            <label for="">Recommendation <span class="text-danger">*</span></label>
                                             <select name="recommendation" class="form-control" required>
                                                 <option value="">Select</option>
                                                 <option value="highly_recommended" {{ old('recommendation', optional($hr)->recommendation) == 'highly_recommended' ? 'selected' : '' }}>Highly Recommended</option>

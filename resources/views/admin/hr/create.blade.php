@@ -239,7 +239,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Status</label>
+                                            <label for="">Status <span class="text-danger">*</span></label>
                                             <select name="status" class="form-control" required>
                                                 <option value="pending" {{ old('status', 'pending') == 'pending' ? 'selected' : '' }}>Pending</option>
                                                 <option value="selected" {{ old('status') == 'selected' ? 'selected' : '' }}>Selected</option>

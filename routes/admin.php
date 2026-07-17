@@ -30,5 +30,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     Route::resource('brokers', BrokerController::class);
     // HR Management
     Route::resource('hr', HRController::class);
+
+    
     
 });
