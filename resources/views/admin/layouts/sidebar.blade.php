@@ -72,6 +72,9 @@
             <li class="{{ setSidebarActive(['admin.brokers.*']) }}"><a class="nav-link"
                     href="{{ url('admin/brokers') }}"><i class="fas fa-handshake"></i> <span>Brokers</span></a>
             </li>
+            <li class="{{ setSidebarActive(['admin.hr.*']) }}"><a class="nav-link"
+                href="{{ url ('admin/hr') }}"><i class="fas fa-handshake"></i> <span>HR Management</span> </a>
+            </li>
 
         </ul>
     </aside>
