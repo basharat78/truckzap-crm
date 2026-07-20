@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HR;
+use App\Models\Broker;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -15,35 +15,31 @@ class FormController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'candidate_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'department' => 'nullable|string|max:255',
-            'expected_salary' => 'required|integer|min:0',
-            'experience' => 'nullable|integer|min:0',
-            'city' => 'nullable|string|max:255',
-            'reference' => 'nullable|string|max:255',
-            'interviewer' => 'required|string|max:255',
-            'interview_date' => 'required|date',
-            'communication' => 'nullable|integer|min:1|max:10',
-            'english' => 'nullable|integer|min:1|max:10',
-            'computer_skills' => 'nullable|integer|min:1|max:10',
-            'confidence' => 'nullable|integer|min:1|max:10',
-            'learning_ability' => 'nullable|integer|min:1|max:10',
-            'dispatch_knowledge' => 'nullable|integer|min:1|max:10',
-            'negotiation_skills' => 'nullable|integer|min:1|max:10',
-            'typing_speed' => 'nullable|integer|min:0',
-            'total_score' => 'nullable|integer|min:0',
-            'strengths' => 'nullable|string|max:255',
-            'weaknesses' => 'nullable|string|max:255',
-            'comments' => 'nullable|string|max:255',
-            'recommendation' => 'nullable|string|max:255',
-            'status' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'dispatcher_name' => 'required|string|max:255',
+            'mc_number' => 'required|string|max:255',
+            'dot_number' => 'required|string|max:255',
+            'website' => 'nullable|url|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:brokers,email',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'zip_code' => 'required|string|max:10',
+            'equipment_type' => 'required|array',
+            'equipment_type.*' => 'string|max:255',
+            'operating_states' => 'required|array',
+            'operating_states.*' => 'string|max:255',
+            'credit_score' => 'nullable|integer|min:0|max:850',
+            'days_to_pay' => 'nullable|integer|min:0',
+            'notes' => 'nullable|string',
         ]);
 
-        HR::create($validated);
+        $validated['status'] = 'pending';
 
-        return redirect()->back()->with('success', 'Your evaluation has been submitted successfully.');
+        Broker::create($validated);
+
+        return redirect()->back()->with('success', 'Your broker application has been submitted successfully.');
     }
 }
