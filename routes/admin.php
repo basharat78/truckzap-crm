@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\BrokerController;
 use App\Http\Controllers\Admin\HRController;
+use App\Http\Controllers\Admin\LeadsController;
 
 Route::get('admin/login', [AuthController::class, 'create'])->name('admin.login');
 Route::post('admin/login', [AuthController::class, 'store'])->name('admin.login.store');
@@ -30,7 +31,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     Route::resource('brokers', BrokerController::class);
     // HR Management
     Route::resource('hr', HRController::class);
-
+    // Leads 
+     Route::get('leads',[LeadsController::class,'index'])->name('leads');
     
     
 });

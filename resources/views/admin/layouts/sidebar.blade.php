@@ -75,6 +75,10 @@
                     <li class="{{ setSidebarActive(['admin.roles.*']) }}"><a class="nav-link" href="{{ url('admin/roles') }}">Roles &amp; Permissions</a></li>
                 </ul>
             </li>
+            
+              <li class="{{ setSidebarActive(['admin.leads']) }}"><a class="nav-link"
+                    href="{{ url('admin/leads') }}"><i class="fas fa-handshake"></i> <span>Leads Management</span></a>
+            </li>
 
         </ul>
     </aside>
