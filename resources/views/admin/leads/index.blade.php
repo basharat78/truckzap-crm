@@ -22,7 +22,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="leads-table">
                                     <thead>
                                         <tr>
                                             <th>Received</th>
@@ -31,32 +31,60 @@
                                             <th>Message</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @forelse ($leads as $lead)
-                                            <tr>
-                                                <td>{{ optional($lead->sent_at)->format('d M Y, h:i A') ?? $lead->created_at->format('d M Y, h:i A') }}</td>
-                                                <td>
-                                                    {{ $lead->sender_name ?? '-' }}
-                                                    @if ($lead->sender_phone)
-                                                        <br><small class="text-muted">{{ $lead->sender_phone }}</small>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $lead->group_name ?? '-' }}</td>
-                                                <td>{{ $lead->message }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="4" class="text-center">No leads received yet.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
                                 </table>
                             </div>
-                            {{ $leads->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="fullMessageModal" tabindex="-1" role="dialog" aria-labelledby="fullMessageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fullMessageModalLabel">Full Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="fullMessageContent" style="white-space: pre-wrap;"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        var leadsTable = $('#leads-table').DataTable({
+            processing: true,
+            serverSide: true,
+            order: [[0, 'desc']],
+            ajax: {
+                url: "{{ url('admin/leads') }}"
+            },
+            columns: [
+                { data: 'received_at', name: 'received_at' },
+                { data: 'sender', name: 'sender', orderable: false, searchable: false },
+                { data: 'group_name', name: 'group_name' },
+                { data: 'message', name: 'message' },
+            ]
+        });
+
+        setInterval(function () {
+            leadsTable.ajax.reload(null, false);
+        }, 15000);
+
+        $(document).on('click', '.read-more-message', function (e) {
+            e.preventDefault();
+            $('#fullMessageContent').text($(this).data('message'));
+            $('#fullMessageModal').modal('show');
+        });
+    </script>
+@endpush

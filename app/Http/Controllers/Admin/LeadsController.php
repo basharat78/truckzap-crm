@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\LeadDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\Lead;
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 
 class LeadsController extends Controller
 {
-    public function index()
+    public function index(LeadDataTable $dataTable): View|JsonResponse
     {
-        $leads = Lead::latest('sent_at')->paginate(20);
-
-        return view('admin.leads.index', compact('leads'));
+        return $dataTable->render('admin.leads.index');
     }
 }
