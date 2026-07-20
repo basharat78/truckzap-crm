@@ -84,6 +84,9 @@
                                     <option value="inactive">Inactive</option>
                                     <option value="blacklisted">Blacklisted</option>
                                 </select>
+                                <button type="button" id="copy-form-link" class="btn btn-secondary btn-sm mr-2" data-url="{{ url('form') }}">
+                                    <i class="fas fa-link"></i> Copy Form Link
+                                </button>
                                 <a href="{{ url('admin/brokers/create') }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-plus"></i> Create Broker
                                 </a>
@@ -173,6 +176,23 @@
 
 @push('scripts')
     <script>
+        $('#copy-form-link').on('click', function () {
+            var url = $(this).data('url');
+
+            navigator.clipboard.writeText(url).then(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Copied!',
+                    text: 'Broker form link copied to clipboard.',
+                    confirmButtonColor: '#6777ef',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }).catch(function () {
+                Swal.fire('Error!', 'Could not copy the link to clipboard.', 'error');
+            });
+        });
+
         var brokersTable = $('#brokers-table').DataTable({
             processing: true,
             serverSide: true,
