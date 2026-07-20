@@ -67,17 +67,17 @@
                     href="{{ url('admin/brokers') }}"><i class="fas fa-handshake"></i> <span>Brokers Management</span></a>
             </li>
          
+           
             
-             <li class="dropdown {{ setSidebarActive(['admin.user.*', 'admin.roles.*]']) }}">
+              <li class="{{ setSidebarActive(['admin.leads']) }}"><a class="nav-link"
+                    href="{{ url('admin/leads') }}"><i class="fas fa-plus"></i> <span>Leads Management</span></a>
+            </li>
+              <li class="dropdown {{ setSidebarActive(['admin.user.*', 'admin.roles.*]']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fas fa-fingerprint"></i> <span>User Management</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.users.*']) }}"><a class="nav-link" href="{{ url('admin/users') }}">Users</a></li>
                     <li class="{{ setSidebarActive(['admin.roles.*']) }}"><a class="nav-link" href="{{ url('admin/roles') }}">Roles &amp; Permissions</a></li>
                 </ul>
-            </li>
-            
-              <li class="{{ setSidebarActive(['admin.leads']) }}"><a class="nav-link"
-                    href="{{ url('admin/leads') }}"><i class="fas fa-handshake"></i> <span>Leads Management</span></a>
             </li>
 
         </ul>
