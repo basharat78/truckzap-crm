@@ -88,8 +88,21 @@ class MightyCallDataTable extends DataTable
                     <i class="fas fa-play"></i> Play
                 </a>';
             })
+            ->addColumn('summary', function (MightyCall $call) {
+                $eligible = $call->recording_url && $call->duration_ms && $call->duration_ms >= 60000;
+
+                if (! $eligible) {
+                    return '<span class="text-muted">-</span>';
+                }
+
+                return '<a href="#" class="btn btn-sm btn-outline-primary view-summary" data-call-id="' . e($call->mightycall_call_id) . '">
+                    <i class="fas fa-robot"></i> AI Summary
+                </a>';
+            })
             ->orderColumn('received_at', 'call_started_at $1')
             ->orderColumn('duration', 'duration_ms $1')
+
+            
             ->filter(function (QueryBuilder $query) {
                 $search = request()->input('search.value');
 
@@ -101,7 +114,7 @@ class MightyCallDataTable extends DataTable
                     });
                 }
             })
-            ->rawColumns(['direction', 'caller', 'called', 'call_status', 'recording'])
+            ->rawColumns(['direction', 'caller', 'called', 'call_status', 'recording', 'summary'])
             ->setRowId('id');
     }
 
@@ -156,6 +169,7 @@ class MightyCallDataTable extends DataTable
             Column::computed('duration')->title('Duration')->orderable(true),
             Column::computed('call_status')->title('Status'),
             Column::computed('recording')->title('Recording'),
+            Column::computed('summary')->title('AI Summary'),
         ];
     }
 

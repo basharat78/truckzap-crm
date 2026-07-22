@@ -72,6 +72,7 @@
                                             <th>Duration</th>
                                             <th>Status</th>
                                             <th>Recording</th>
+                                            <th>AI Summary</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -96,6 +97,23 @@
                     <audio id="recordingPlayer" controls style="width: 100%;">
                         Your browser does not support the audio element.
                     </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="aiSummaryModal" tabindex="-1" role="dialog" aria-labelledby="aiSummaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aiSummaryModalLabel"><i class="fas fa-robot mr-2"></i>AI Call Summary</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center text-muted">
+                    <i class="fas fa-robot fa-2x mb-3"></i>
+                    <p class="mb-0">AI-generated call summaries are coming soon. Once enabled, this will show a summary of the call generated from the recording.</p>
                 </div>
             </div>
         </div>
@@ -127,12 +145,11 @@
                 { data: 'duration', name: 'duration' },
                 { data: 'call_status', name: 'call_status', orderable: false, searchable: false },
                 { data: 'recording', name: 'recording', orderable: false, searchable: false },
+                { data: 'summary', name: 'summary', orderable: false, searchable: false },
             ]
         });
 
-        // $('#direction-filter, #agent-filter, #date-from-filter, #date-to-filter').on('change', function () {
-        //     mightyCallsTable.draw();
-        // });
+        
           $('#duration-filter, #direction-filter, #agent-filter, #date-from-filter, #date-to-filter').on('change', function () {
             mightyCallsTable.draw();
         });
@@ -162,6 +179,12 @@
             player.src = url;
             $('#recordingModal').modal('show');
             player.play();
+        });
+
+        $(document).on('click', '.view-summary', function (e) {
+            e.preventDefault();
+
+            $('#aiSummaryModal').modal('show');
         });
 
         $('#recordingModal').on('hidden.bs.modal', function () {
