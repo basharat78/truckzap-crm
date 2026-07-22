@@ -125,6 +125,9 @@ class MightyCallDataTable extends DataTable
             })
             ->when(request()->filled('date_to'), function (QueryBuilder $query) {
                 $query->where('call_started_at', '<=', Carbon::parse(request()->input('date_to'), 'Asia/Karachi')->endOfDay()->utc());
+            })
+            ->when(request()->filled('duration'), function (QueryBuilder $query) {
+                $query->where('duration_ms', '>=', (int) request()->input('duration') * 1000);
             });
     }
 

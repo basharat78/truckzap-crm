@@ -44,11 +44,16 @@
                                     <option value="Incoming">Incoming</option>
                                     <option value="Outgoing">Outgoing</option>
                                 </select>
+
                                 <select id="agent-filter" class="form-control form-control-sm mr-2 mb-2" style="width: auto;">
                                     <option value="">All Agents</option>
                                     @foreach ($agents ?? [] as $agent)
                                         <option value="{{ $agent->agent_extension }}">{{ $agent->agent_name }}</option>
                                     @endforeach
+                                </select>
+                                   <select id="duration-filter" class="form-control form-control-sm mr-2 mb-2" style="width: auto;">
+                                    <option value="">Duration</option>
+                                    <option value="60">1 Minute+</option>
                                 </select>
                                 <input type="date" id="date-from-filter" class="form-control form-control-sm mr-2 mb-2" style="width: auto;" title="From date">
                                 <input type="date" id="date-to-filter" class="form-control form-control-sm mr-2 mb-2" style="width: auto;" title="To date">
@@ -110,6 +115,8 @@
                     d.agent = $('#agent-filter').val();
                     d.date_from = $('#date-from-filter').val();
                     d.date_to = $('#date-to-filter').val();
+                    d.duration = $('#duration-filter').val();
+
                 }
             },
             columns: [
@@ -123,13 +130,17 @@
             ]
         });
 
-        $('#direction-filter, #agent-filter, #date-from-filter, #date-to-filter').on('change', function () {
+        // $('#direction-filter, #agent-filter, #date-from-filter, #date-to-filter').on('change', function () {
+        //     mightyCallsTable.draw();
+        // });
+          $('#duration-filter, #direction-filter, #agent-filter, #date-from-filter, #date-to-filter').on('change', function () {
             mightyCallsTable.draw();
         });
 
         $('#clear-filters').on('click', function () {
             $('#direction-filter, #agent-filter').val('');
             $('#date-from-filter, #date-to-filter').val('');
+                 $('#duration-filter').val('');
             mightyCallsTable.draw();
         });
 
