@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-class adminseeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
