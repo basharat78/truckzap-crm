@@ -16,6 +16,8 @@ class MightyCall extends Model
         'caller_extension',
         'called_name',
         'called_phone',
+        'agent_name',
+        'agent_extension',
         'duration_ms',
         'recording_filename',
         'recording_url',

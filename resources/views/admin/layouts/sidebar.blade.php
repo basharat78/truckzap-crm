@@ -72,6 +72,9 @@
               <li class="{{ setSidebarActive(['admin.leads']) }}"><a class="nav-link"
                     href="{{ url('admin/leads') }}"><i class="fas fa-plus"></i> <span>Leads Management</span></a>
             </li>
+              <li class="{{ setSidebarActive(['admin.mc']) }}"><a class="nav-link"
+                    href="{{ url('admin/mc') }}"><i class="fas fa-headset"></i> <span>Call Recordings (QC)</span></a>
+            </li>
               <li class="dropdown {{ setSidebarActive(['admin.user.*', 'admin.roles.*]']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fas fa-fingerprint"></i> <span>User Management</span></a>
                 <ul class="dropdown-menu">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('mightycall_call_id')->unique();
             
-            $table->string('direction')->nullale();
+            $table->string('direction')->nullable();
             $table->string('call_status')->nullable();
             $table->string('business_number')->nullable();
 

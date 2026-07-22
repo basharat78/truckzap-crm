@@ -85,12 +85,13 @@ class MightyCallService
                 : $this->authenticate();
 
             $expiresAt = now()->addSeconds(($data['expires_in'] ?? 3600) - 60);
+            $cacheTtl = $expiresAt->copy()->addDay();
 
             Cache::put('mightycall.token', [
                 'access_token' => $data['access_token'],
                 'refresh_token' => $data['refresh_token'] ?? null,
-                'expires_at' => $expiresAt,
-            ], $expiresAt->addDay());
+                'expires_at' => $expiresAt->toIso8601String(),
+            ], $cacheTtl);
 
             return $data['access_token'];
         });
