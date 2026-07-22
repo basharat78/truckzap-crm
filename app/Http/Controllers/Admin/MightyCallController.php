@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\MightyCallDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\MightyCall;
+use App\Services\CallSummaryService;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
