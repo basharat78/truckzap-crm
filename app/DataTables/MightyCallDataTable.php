@@ -35,7 +35,7 @@ class MightyCallDataTable extends DataTable
             ->addColumn('received_at', function (MightyCall $call) {
                 return optional($call->call_started_at ?? $call->created_at)
                     ->copy()
-                    ->timezone('Asia/Karachi')
+                    ->timezone('America/Chicago')
                     ->format('d M Y, h:i A');
             })
             ->addColumn('direction', function (MightyCall $call) {
@@ -121,10 +121,10 @@ class MightyCallDataTable extends DataTable
                 $query->where('agent_extension', request()->input('agent'));
             })
             ->when(request()->filled('date_from'), function (QueryBuilder $query) {
-                $query->where('call_started_at', '>=', Carbon::parse(request()->input('date_from'), 'Asia/Karachi')->startOfDay()->utc());
+                $query->where('call_started_at', '>=', Carbon::parse(request()->input('date_from'), 'America/Chicago')->startOfDay()->utc());
             })
             ->when(request()->filled('date_to'), function (QueryBuilder $query) {
-                $query->where('call_started_at', '<=', Carbon::parse(request()->input('date_to'), 'Asia/Karachi')->endOfDay()->utc());
+                $query->where('call_started_at', '<=', Carbon::parse(request()->input('date_to'), 'America/Chicago')->endOfDay()->utc());
             })
             ->when(request()->filled('duration'), function (QueryBuilder $query) {
                 $query->where('duration_ms', '>=', (int) request()->input('duration') * 1000);

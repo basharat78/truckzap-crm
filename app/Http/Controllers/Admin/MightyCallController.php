@@ -39,8 +39,8 @@ class MightyCallController extends Controller
 
     protected function todaysAgentStats(): Collection
     {
-        $todayStart = now('Asia/Karachi')->startOfDay()->utc();
-        $todayEnd = now('Asia/Karachi')->endOfDay()->utc();
+        $todayStart = now('America/Chicago')->startOfDay()->utc();
+        $todayEnd = now('America/Chicago')->endOfDay()->utc();
 
         return MightyCall::whereNotNull('agent_extension')
             ->whereBetween('call_started_at', [$todayStart, $todayEnd])

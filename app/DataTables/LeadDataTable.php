@@ -33,7 +33,7 @@ class LeadDataTable extends DataTable
             ->addColumn('received_at', function (Lead $lead) {
                 return optional($lead->sent_at ?? $lead->created_at)
                     ->copy()
-                    ->timezone('Asia/Karachi')
+                    ->timezone('America/Chicago')
                     ->format('d M Y, h:i A');
             })
             ->addColumn('sender', function (Lead $lead) {
