@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\MightyCallDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\MightyCall;
+use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class MightyCallController extends Controller
@@ -16,10 +18,31 @@ class MightyCallController extends Controller
             return $dataTable->render('admin.mighty_calls.index');
         }
 
+        $agentStats = $this->todaysAgentStats();
+
+        $agents = MightyCall::whereNotNull('agent_extension')
+            ->select('agent_extension', 'agent_name')
+            ->get()
+            ->unique('agent_extension')
+            ->sortBy('agent_name')
+            ->values();
+
+        return $dataTable->render('admin.mighty_calls.index', compact('agentStats', 'agents'));
+    }
+
+    public function agentCards(): ViewContract
+    {
+        return view('admin.mighty_calls._agent_cards', [
+            'agentStats' => $this->todaysAgentStats(),
+        ]);
+    }
+
+    protected function todaysAgentStats(): Collection
+    {
         $todayStart = now('Asia/Karachi')->startOfDay()->utc();
         $todayEnd = now('Asia/Karachi')->endOfDay()->utc();
 
-        $agentStats = MightyCall::whereNotNull('agent_extension')
+        return MightyCall::whereNotNull('agent_extension')
             ->whereBetween('call_started_at', [$todayStart, $todayEnd])
             ->get()
             ->groupBy('agent_extension')
@@ -34,14 +57,5 @@ class MightyCallController extends Controller
             })
             ->sortBy('agent_name')
             ->values();
-
-        $agents = MightyCall::whereNotNull('agent_extension')
-            ->select('agent_extension', 'agent_name')
-            ->get()
-            ->unique('agent_extension')
-            ->sortBy('agent_name')
-            ->values();
-
-        return $dataTable->render('admin.mighty_calls.index', compact('agentStats', 'agents'));
     }
 }

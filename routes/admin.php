@@ -36,6 +36,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
      Route::get('leads',[LeadsController::class,'index'])->name('leads');
     //Mighty Calls
     Route::get('/mc',[MightyCallController::class ,'index'])->name('mc');
+    Route::get('/mc/agent-cards',[MightyCallController::class ,'agentCards'])->name('mc.agent-cards');
 
     
 });
