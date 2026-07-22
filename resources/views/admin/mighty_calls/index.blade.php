@@ -111,9 +111,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center text-muted">
-                    <i class="fas fa-robot fa-2x mb-3"></i>
-                    <p class="mb-0">AI-generated call summaries are coming soon. Once enabled, this will show a summary of the call generated from the recording.</p>
+                <div class="modal-body">
+                    <div id="aiSummaryLoading" class="text-center text-muted">
+                        <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                        <p class="mb-0">Summarizing call...</p>
+                    </div>
+                    <div id="aiSummaryError" class="alert alert-danger" style="display: none;"></div>
+                    <p id="aiSummaryContent" style="display: none; white-space: pre-wrap;"></p>
                 </div>
             </div>
         </div>
@@ -184,7 +188,26 @@
         $(document).on('click', '.view-summary', function (e) {
             e.preventDefault();
 
+            var callId = $(this).data('id');
+
+            $('#aiSummaryContent, #aiSummaryError').hide().text('');
+            $('#aiSummaryLoading').show();
             $('#aiSummaryModal').modal('show');
+
+            $.ajax({
+                url: "{{ url('admin/mc') }}/" + callId + "/summary",
+                type: 'POST',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function (response) {
+                    $('#aiSummaryLoading').hide();
+                    $('#aiSummaryContent').text(response.summary).show();
+                },
+                error: function (xhr) {
+                    $('#aiSummaryLoading').hide();
+                    var message = (xhr.responseJSON && xhr.responseJSON.message) || 'Something went wrong while generating the summary.';
+                    $('#aiSummaryError').text(message).show();
+                }
+            });
         });
 
         $('#recordingModal').on('hidden.bs.modal', function () {

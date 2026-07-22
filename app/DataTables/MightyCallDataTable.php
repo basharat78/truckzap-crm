@@ -95,7 +95,7 @@ class MightyCallDataTable extends DataTable
                     return '<span class="text-muted">-</span>';
                 }
 
-                return '<a href="#" class="btn btn-sm btn-outline-primary view-summary" data-call-id="' . e($call->mightycall_call_id) . '">
+                return '<a href="#" class="btn btn-sm btn-outline-primary view-summary" data-id="' . e($call->id) . '">
                     <i class="fas fa-robot"></i> AI Summary
                 </a>';
             })

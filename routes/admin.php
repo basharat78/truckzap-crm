@@ -37,6 +37,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     //Mighty Calls
     Route::get('/mc',[MightyCallController::class ,'index'])->name('mc');
     Route::get('/mc/agent-cards',[MightyCallController::class ,'agentCards'])->name('mc.agent-cards');
+    // Open Api 
+    Route::post('/mc/{mightyCall}/summary', [MightyCallController::class, 'summary'])->name('mc.summary');
 
     
 });

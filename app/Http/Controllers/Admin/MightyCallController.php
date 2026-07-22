@@ -58,4 +58,23 @@ class MightyCallController extends Controller
             ->sortBy('agent_name')
             ->values();
     }
+  
+     public function summary(MightyCall $mightyCall, CallSummaryService $summaryService): JsonResponse
+{
+    if (! $mightyCall->recording_url) {
+        return response()->json(['message' => 'No recording available for this call.'], 422);
+    }
+
+    try {
+        $summary = $summaryService->summarize($mightyCall->recording_url);
+    } catch (\Throwable $e) {
+        report($e);
+
+        return response()->json(['message' => 'Failed to generate summary. Please try again.'], 500);
+    }
+
+    return response()->json(['summary' => $summary]);
+}
+
+
 }
