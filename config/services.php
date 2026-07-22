@@ -38,5 +38,11 @@ return [
     'lead_webhook' => [
         'secret' => env('LEAD_WEBHOOK_SECRET'),
     ],
+    'mighty_call' => [
+        'base_url' => env('BASE_URL'),
+        'api_key' => env('API_KEY'),
+        'secret' => env('MIGHTY_SECRET_KEY'),
+        
+    ]
 
 ];
