@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     public function create(){
-        if(Auth::check() && Auth::user()->hasRole('admin')){
+        if(Auth::check() && Auth::user()->roles->isNotEmpty()){
             return redirect()->route('admin.dashboard.index');
         }
 
@@ -27,14 +27,14 @@ class AuthController extends Controller
             throw ValidationException::withMessages([
                 'email' => __('the provided credentials do not match our records.'),
             ]);
-           
+
         }
-        if(!Auth::user()->hasRole('admin')){
+        if(Auth::user()->roles->isEmpty()){
             Auth::logout();
             throw ValidationException::withMessages([
                 'email' => __('the provided credentials do not match our records.'),
             ]);
-            
+
         }
         $request->session()->regenerate();
         return redirect()->route('admin.dashboard.index');

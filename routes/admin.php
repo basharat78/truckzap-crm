@@ -16,7 +16,7 @@ Route::post('admin/login', [AuthController::class, 'store'])->name('admin.login.
 Route::post('admin/logout', [AuthController::class, 'destroy'])->name('admin.logout');
 
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','role:admin']], function () {
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // Profile
@@ -25,9 +25,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     Route::post('profile/password', [ProfileController::class, 'PasswordUpdate'])->name('profile.password.update');
 
     // User Management
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->middleware('role:admin');
     // Role Management
-    Route::resource('roles', RoleController::class);
+    Route::resource('roles', RoleController::class)->middleware('role:admin');
     //Broker Management
     Route::resource('brokers', BrokerController::class)->middleware('permission:manage-brokers');
     // HR Management
