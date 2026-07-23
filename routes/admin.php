@@ -29,9 +29,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     // Role Management
     Route::resource('roles', RoleController::class);
     //Broker Management
-    Route::resource('brokers', BrokerController::class);
+    Route::resource('brokers', BrokerController::class)->middleware('permission:manage-brokers');
     // HR Management
-    Route::resource('hr', HRController::class);
+    Route::resource('hr', HRController::class)->middleware('permission:manage-hr');
     // Leads
     Route::get('leads',[LeadsController::class,'index'])->name('leads')->middleware('permission:manage-leads');
     //Mighty Calls
