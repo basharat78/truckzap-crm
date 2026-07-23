@@ -20,6 +20,7 @@ class RolePermissionSeeder extends Seeder
             'manage-leads',
             'manage-deals',
             'manage-settings',
+            'manage-mighty-calls',
         ];
 
         foreach ($permissions as $perm) {

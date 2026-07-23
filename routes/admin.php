@@ -32,13 +32,15 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth','ro
     Route::resource('brokers', BrokerController::class);
     // HR Management
     Route::resource('hr', HRController::class);
-    // Leads 
-     Route::get('leads',[LeadsController::class,'index'])->name('leads');
+    // Leads
+    Route::get('leads',[LeadsController::class,'index'])->name('leads')->middleware('permission:manage-leads');
     //Mighty Calls
-    Route::get('/mc',[MightyCallController::class ,'index'])->name('mc');
-    Route::get('/mc/agent-cards',[MightyCallController::class ,'agentCards'])->name('mc.agent-cards');
-    // Open Api 
-    Route::post('/mc/{mightyCall}/summary', [MightyCallController::class, 'summary'])->name('mc.summary');
+    Route::middleware('permission:manage-mighty-calls')->group(function () {
+        Route::get('/mc',[MightyCallController::class ,'index'])->name('mc');
+        Route::get('/mc/agent-cards',[MightyCallController::class ,'agentCards'])->name('mc.agent-cards');
+        // Open Api
+        Route::post('/mc/{mightyCall}/summary', [MightyCallController::class, 'summary'])->name('mc.summary');
+    });
 
     
 });
