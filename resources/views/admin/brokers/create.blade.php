@@ -50,8 +50,8 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">DOT Number <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="dot_number" value="{{ old('dot_number') }}" required>
+                                            <label for="">DOT Number</label>
+                                            <input type="text" class="form-control" name="dot_number" value="{{ old('dot_number') }}">
                                         </div>
                                     </div>
 

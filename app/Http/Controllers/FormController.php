@@ -18,7 +18,7 @@ class FormController extends Controller
             'company_name' => 'required|string|max:255',
             'dispatcher_name' => 'required|string|max:255',
             'mc_number' => 'required|string|max:255',
-            'dot_number' => 'required|string|max:255',
+            'dot_number' => 'nullable|string|max:255',
             'website' => 'nullable|url|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:brokers,email',
